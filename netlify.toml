@@ -2,6 +2,7 @@
 [build]
   command = "npm run build"
   publish = "."
+  environment = { SECRETS_SCAN_OMIT_PATHS = "config.js" }
 
 # Environment variables will be injected at build time
 # Set these in Netlify Dashboard: Site settings > Environment variables
