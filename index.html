@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambagan Expense Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css"></style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Ambagan Expense Tracker</h1>
+            <p>Track shared expenses and manage debts easily</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Add New Expense</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Purpose</label>
+                        <input type="text" id="purpose" placeholder="e.g., Lunch, Supplies" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" id="quantity" placeholder="1" value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Total Amount</label>
+                        <input type="number" id="totalAmount" placeholder="0.00" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Creditor (Who paid?)</label>
+                        <select id="creditor" onchange="document.getElementById('creditor').value=this.value">
+                            <option value="" disabled selected>Select Creditor</option>
+                            <option value="Allen">Allen</option>
+                            <option value="Kristhia">Kristhia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Debtor (Who owes?)</label>
+                        <select id="debtor" onchange="document.getElementById('debtor').value=this.value">
+                            <option value="" disabled selected>Select Debtor</option>
+                            <option value="Allen">Allen</option>
+                            <option value="Kristhia">Kristhia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Amount Owed (Auto: Half of Total)</label>
+                        <input type="number" id="debtorAmount" placeholder="0.00" step="0.01" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="status">
+                            <option>Pending</option>
+                            <option>Paid</option>
+                        </select>
+                    </div>
+                </div>
+                <span class="button-group">
+                    <button class="btn" onclick="addExpense()">Add Expense</button>
+                    <button class="btn btn-secondary" onclick="exportToExcel()">Export to Excel</button>
+                </span>
+ 
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Outstanding Debts Summary</h2>
+                <div class="debt-summary" id="debtSummary"></div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Expense Records</h2>
+                <div class="table-container">
+                    <table id="expenseTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Purpose</th>
+                                <th>Quantity</th>
+                                <th>Total Amount</th>
+                                <th>Creditor</th>
+                                <th>Debtor</th>
+                                <th>Amount Owed</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
