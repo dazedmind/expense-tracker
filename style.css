@@ -227,6 +227,14 @@ tr:hover {
     font-size: 0.875rem;
 }
 
+#debtorAmount {
+    outline: none;
+    font-size: 3rem;
+    border: none;
+    color: #1e293b;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         margin: 0 .3rem;

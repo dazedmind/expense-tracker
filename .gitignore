@@ -16,3 +16,4 @@ Thumbs.db
 
 # Dependencies (if you add npm later)
 node_modules/
+config.js
