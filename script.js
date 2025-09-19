@@ -8,7 +8,42 @@ function initializeApp() {
   // Auto-calculate amount owed when total amount changes
   document.getElementById("totalAmount").addEventListener("input", function () {
     const total = parseFloat(this.value) || 0;
-    document.getElementById("debtorAmount").value = (total / 2).toFixed(2);
+
+    const isPayment = document.getElementById("isPayment").checked;
+    if (isPayment) {
+      document.getElementById("debtorAmount").value = total.toFixed(2);
+    } else {
+      document.getElementById("debtorAmount").value = (total / 2).toFixed(2);
+    }
+  });
+
+  // Handle payment checkbox changes
+  document.getElementById("isPayment").addEventListener("change", function () {
+    const total = parseFloat(document.getElementById("totalAmount").value) || 0;
+    const creditorLabel = document.querySelector('label[for="creditor"]');
+    const debtorLabel = document.querySelector('label[for="debtor"]');
+    const debtorAmountLabel = document.querySelector(
+      'label[for="debtorAmount"]'
+    );
+
+    if (this.checked) {
+      document.getElementById("debtorAmount").value = total.toFixed(2);
+      document.getElementById("submit-btn").textContent = "Add Payment";
+      document.getElementById("submit-btn").style =
+        "background-color: #28a745;";
+      if (debtorAmountLabel) debtorAmountLabel.textContent = "Payment Amount";
+      if (creditorLabel)
+        creditorLabel.textContent = "Creditor (Who receives payment?)";
+      if (debtorLabel) debtorLabel.textContent = "Debtor (Who is paying?)";
+    } else {
+      document.getElementById("debtorAmount").value = (total / 2).toFixed(2);
+      document.getElementById("submit-btn").style =
+        "background-color: #2563eb;";
+      document.getElementById("submit-btn").textContent = "Add Expense";
+      if (debtorAmountLabel) debtorAmountLabel.textContent = "Amount Owed";
+      if (creditorLabel) creditorLabel.textContent = "Creditor (Who paid?)";
+      if (debtorLabel) debtorLabel.textContent = "Debtor (Who owes?)";
+    }
   });
 
   // Check if Supabase is ready
@@ -44,6 +79,8 @@ function showError(message) {
 }
 
 async function addExpense() {
+  const isPayment = document.getElementById("isPayment").checked;
+
   const expense = {
     date: document.getElementById("date").value,
     purpose: document.getElementById("purpose").value,
@@ -51,7 +88,9 @@ async function addExpense() {
     total_amount: parseFloat(document.getElementById("totalAmount").value),
     creditor: document.getElementById("creditor").value,
     debtor: document.getElementById("debtor").value,
-    debtor_amount: parseFloat(document.getElementById("debtorAmount").value),
+    debtor_amount: isPayment
+      ? -parseFloat(document.getElementById("totalAmount").value)
+      : parseFloat(document.getElementById("debtorAmount").value),
   };
 
   // Validation
@@ -185,6 +224,7 @@ function clearForm() {
   document.getElementById("creditor").value = "";
   document.getElementById("debtor").value = "";
   document.getElementById("debtorAmount").value = "";
+  document.getElementById("isPayment").checked = false;
   document.getElementById("date").valueAsDate = new Date();
 }
 

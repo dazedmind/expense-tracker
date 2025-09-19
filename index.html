@@ -49,7 +49,7 @@
                         <input type="number" id="totalAmount" placeholder="0.00" step="0.01" required>
                     </div>
                     <div class="form-group">
-                        <label>Creditor (Who paid?)</label>
+                        <label for="creditor">Creditor (Who paid?)</label>
                         <select id="creditor" required>
                             <option value="" disabled selected>Select Creditor</option>
                             <option value="Allen">Allen</option>
@@ -57,7 +57,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Debtor (Who owes?)</label>
+                        <label for="debtor">Debtor (Who owes?)</label>
                         <select id="debtor" required>
                             <option value="" disabled selected>Select Debtor</option>
                             <option value="Allen">Allen</option>
@@ -65,12 +65,18 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Amount Owed</label>
-                        <input type="number" id="debtorAmount" placeholder="0.00" step="0.01" required readonly>
+                        <label for="debtorAmount">Amount Owned:</label>
+                        <input type="number" id="debtorAmount" name="debtorAmount" placeholder="0.00" step="0.01" required readonly>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" id="isPayment" style="margin-right: 8px; cursor: pointer;">
+                            Direct Payment (No debt created)
+                        </label>
                     </div>
                 </div>
                 <span class="button-group">
-                    <button class="btn" onclick="addExpense()">Add Expense</button>
+                    <button class="btn" id="submit-btn" onclick="addExpense()">Add Expense</button>
                     <button class="btn btn-secondary" onclick="exportToExcel()">Export</button>
                 </span>
             </div>
