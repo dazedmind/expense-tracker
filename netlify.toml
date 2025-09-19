@@ -1,0 +1,16 @@
+# Netlify configuration file
+[build]
+  command = "npm run build"
+  publish = "."
+
+# Environment variables will be injected at build time
+# Set these in Netlify Dashboard: Site settings > Environment variables
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"

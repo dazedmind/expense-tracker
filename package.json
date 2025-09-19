@@ -1,0 +1,15 @@
+{
+  "name": "ambagan-expense-tracker",
+  "version": "1.0.0",
+  "description": "Shared expense tracker with Supabase backend",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [
+    "expense-tracker",
+    "supabase",
+    "netlify"
+  ],
+  "author": "",
+  "license": "MIT"
+}
