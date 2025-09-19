@@ -1,14 +1,28 @@
 let expenses = [];
 
+// Check authentication on page load
+function checkAuthentication() {
+  const isAuthenticated = sessionStorage.getItem("authenticated");
+  if (!isAuthenticated) {
+    window.location.href = "login.html";
+    return false;
+  }
+  return true;
+}
+
 // Wait for DOM and Supabase to be ready
 function initializeApp() {
+  // Check authentication first
+  if (!checkAuthentication()) {
+    return;
+  }
+
   // Set today's date as default
   document.getElementById("date").valueAsDate = new Date();
 
   // Auto-calculate amount owed when total amount changes
   document.getElementById("totalAmount").addEventListener("input", function () {
     const total = parseFloat(this.value) || 0;
-
     const isPayment = document.getElementById("isPayment").checked;
     if (isPayment) {
       document.getElementById("debtorAmount").value = total.toFixed(2);
@@ -307,6 +321,16 @@ async function loadExpenses() {
 
 // Initialize on page load
 window.onload = function () {
+  // Check authentication first
+  if (!checkAuthentication()) {
+    return;
+  }
   loadExpenses();
   initializeApp();
 };
+
+// Logout function
+function logout() {
+  sessionStorage.removeItem("authenticated");
+  window.location.href = "login.html";
+}

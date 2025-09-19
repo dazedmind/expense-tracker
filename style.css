@@ -94,8 +94,8 @@ select:focus {
     padding: 10px 24px;
     border: none;
     border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: medium;
+    font-weight: bold;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -104,9 +104,19 @@ select:focus {
     background: #1d4ed8;
 }
 
+.logout-btn {
+    background: #7fa8e1;
+    color: white;
+    font-weight: bold;
+    font-size: medium;
+    margin-top: 0.5rem;
+}
+
 .btn-secondary {
-    background: #64748b;
-    margin-left: 10px;
+    background: #838f9e;
+    color: white;
+    font-weight: bold;
+    font-size: medium;
 }
 
 .btn-secondary:hover {
@@ -235,15 +245,33 @@ tr:hover {
     font-weight: 600;
 }
 
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 @media screen and (max-width: 768px) {
     .container {
         margin: 0 .3rem;
+    }
+
+    .btn {
+        width: 100%;
+        font-size: small;
     }
 
     .button-group {
         width: full-width;
         height: auto;
         display: flex;
+        gap: 0.5rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.5rem;
     }
 }
 
